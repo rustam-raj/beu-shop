@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEU Shop | Campus Re-use & Marketplace</title>
+  
+  <!-- Google Font & Tailwind CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md shadow-emerald-200">
+          <i data-lucide="repeat" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-xl font-bold tracking-tight text-slate-900">BEU <span class="text-emerald-600">Shop</span></span>
+          <span class="block text-[10px] text-slate-400 font-medium -mt-1">38 Engineering Colleges</span>
+        </div>
+      </a>
+
+      <a href="post-item.html" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm transition-all hover:shadow-emerald-200 hover:shadow-md">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Donate / Sell</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero & Filter Section -->
+  <section class="bg-gradient-to-b from-emerald-50/60 to-transparent py-10 px-4">
+    <div class="max-w-3xl mx-auto text-center space-y-3">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+        🌱 Eco-friendly Campus Re-use
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        Seniors se Juniors tak, har zaroorat aasan
+      </h1>
+      <p class="text-slate-600 text-sm sm:text-base">
+        Drafter, lab coats, books, ya cycle—apne campus ke andar hi buy, sell ya free donate karo.
+      </p>
+
+      <!-- Campus Selector Filter -->
+      <div class="pt-4">
+        <div class="relative max-w-xl mx-auto">
+          <i data-lucide="map-pin" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+          <select id="collegeFilter" class="w-full pl-12 pr-10 py-3.5 bg-white border border-slate-300 rounded-2xl shadow-sm text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent appearance-none cursor-pointer">
+            <option value="ALL">📍 All 38 BEU Engineering Colleges</option>
+          </select>
+          <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Items Feed -->
+  <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <i data-lucide="sparkles" class="w-5 h-5 text-emerald-600"></i>
+        Available in Campus
+      </h2>
+      <span id="itemCount" class="text-xs font-medium text-slate-500 bg-slate-200/60 px-2.5 py-1 rounded-full">Showing Items</span>
+    </div>
+
+    <!-- Product Grid (Firebase se dynamic cards aayenge) -->
+    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </main>
+
+  <!-- Single Clean Script Section -->
+  <script src="assets/js/colleges.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Populate Colleges in Filter
+    const collegeSelect = document.getElementById('collegeFilter');
+    if (typeof beuColleges !== 'undefined' && collegeSelect) {
+      beuColleges.forEach(col => {
+        const opt = document.createElement('option');
+        opt.value = col;
+        opt.textContent = col;
+        collegeSelect.appendChild(opt);
+      });
+    }
+  </script>
+</body>
+</html>
