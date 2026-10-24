@@ -1,8 +1,130 @@
-<script src="./assets/js/colleges.js"></script>
-  <script type="module" src="./assets/js/post.js"></script>
-  <script>
-    lucide.createIcons();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post Item | BEU Shop</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4">
+
+  <div class="max-w-xl mx-auto">
+    <!-- Back to Home -->
+    <a href="index.html" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-emerald-600 transition mb-6">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      Back to Campus Feed
+    </a>
+
+    <!-- Form Container -->
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-slate-900">List an Item</h1>
+        <p class="text-xs sm:text-sm text-slate-500 mt-1">Apne junior ya batchmate ki help karein. Give away for free ya minimal price pe sell karein.</p>
+      </div>
+
+      <form id="postItemForm" class="space-y-4">
+        <!-- Item Title -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Item Title</label>
+          <input type="text" id="title" required placeholder="e.g. Mini Drafter, 1st Year Chemistry Book, Cooler" 
+                 class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <!-- College Select -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Your College</label>
+          <select id="college" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="" disabled selected>Select your engineering college</option>
+          </select>
+        </div>
+
+        <!-- Price & Condition -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Price (₹)</label>
+            <input type="number" id="price" min="0" placeholder="0 if giving for free" 
+                   class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Condition</label>
+            <select id="condition" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+              <option value="Like New">Like New</option>
+              <option value="Good">Good Condition</option>
+              <option value="Fair">Fair / Usable</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Image URL -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Product Image Link</label>
+          <input type="url" id="imageUrl" placeholder="Paste image web link (optional)" 
+                 class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Short Details</label>
+          <textarea id="description" rows="3" placeholder="Kitna purana hai, kab handover kar sakte ho..." 
+                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="border-t border-slate-100 pt-4 mt-2">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-3">Campus Contact Info</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs text-slate-500 mb-1">Your Name</label>
+              <input type="text" id="sellerName" required placeholder="Aman Raj" 
+                     class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <div>
+              <label class="block text-xs text-slate-500 mb-1">WhatsApp Number</label>
+              <input type="tel" id="sellerWhatsApp" required placeholder="10-digit number" pattern="[0-9]{10}"
+                     class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submitBtn" class="w-full mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl shadow-md shadow-emerald-200 transition">
+          Post Item on Campus Feed
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Colleges Data Script -->
+  <script src="assets/js/colleges.js"></script>
+
+  <!-- Complete Inlined Firebase Submission Logic -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Aapka Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnhUGesukKWMQ5EyKuVU3WLeQeVfTXds4",
+      authDomain: "beu-shop-c8b5c.firebaseapp.com",
+      projectId: "beu-shop-c8b5c",
+      storageBucket: "beu-shop-c8b5c.firebasestorage.app",
+      messagingSenderId: "876278462311",
+      appId: "1:876278462311:web:05b2c44674fe381cfd61c2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Populate Colleges Dropdown
     const collegeDropdown = document.getElementById('college');
     if (typeof beuColleges !== 'undefined' && collegeDropdown) {
       beuColleges.forEach(col => {
@@ -12,6 +134,59 @@
         collegeDropdown.appendChild(opt);
       });
     }
+
+    // Initialize Icons
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    // Form Submit Handler
+    const form = document.getElementById("postItemForm");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value.trim();
+      const college = document.getElementById("college").value;
+      const priceVal = document.getElementById("price").value;
+      const condition = document.getElementById("condition").value;
+      const imageUrl = document.getElementById("imageUrl").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const sellerName = document.getElementById("sellerName").value.trim();
+      const sellerWhatsApp = document.getElementById("sellerWhatsApp").value.trim();
+
+      const price = Number(priceVal) || 0;
+      const isFree = price === 0;
+      const finalImage = imageUrl || "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=500&q=80";
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Posting to Campus Feed...";
+
+      try {
+        await addDoc(collection(db, "products"), {
+          title,
+          college,
+          price,
+          isFree,
+          condition,
+          imageUrl: finalImage,
+          description,
+          sellerName,
+          sellerWhatsApp,
+          createdAt: new Date().toISOString()
+        });
+
+        alert("🎉 Item successfully posted on BEU Shop!");
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Firebase error:", error);
+        alert("Upload error: " + error.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Post Item on Campus Feed";
+      }
+    });
   </script>
 </body>
 </html>
